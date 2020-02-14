@@ -1,0 +1,79 @@
+//
+//  main.cpp
+//  Homework 1
+//
+//  Created by Adam P Hayes on 1/27/20.
+//  Copyright © 2020 WIU. All rights reserved.
+//
+#define GL_SILENCE_DEPRECATION
+#include <GLUT/GLUT.h>
+#include <iostream>
+
+const int MAP_SIZE=16;
+int bitMap[MAP_SIZE][MAP_SIZE]={
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+    {0,0,1,0,0,0,0,0,0,0,0,0,0,1,0,0},
+    {0,0,0,1,0,0,1,1,1,1,0,0,1,0,0,0},
+    {0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0},
+    {0,0,0,0,1,1,0,0,0,0,1,1,0,0,0,0},
+    {0,0,0,1,1,1,0,4,4,0,1,1,1,0,0,0},
+    {0,0,1,1,1,1,0,4,4,0,1,1,1,1,0,0},
+    {0,0,1,1,1,1,0,0,0,0,1,1,1,1,0,0},
+    {0,0,1,1,1,1,1,1,1,1,1,1,1,1,0,0},
+    {0,0,0,1,1,2,2,2,2,2,2,1,1,0,0,0},
+    {0,0,0,0,1,1,2,2,2,2,1,1,0,0,0,0},
+    {0,0,0,0,0,1,1,1,1,1,1,0,0,0,0,0},
+    {0,0,0,0,0,0,1,1,1,1,0,0,0,0,0,0},
+    {0,0,0,0,0,3,0,0,0,0,3,0,0,0,0,0},
+    {0,0,0,3,3,0,0,0,0,0,0,3,3,0,0,0},
+    {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
+};
+
+
+void display(){
+    //glColor3f(1.0f, 0.0f, 0.0f);
+    glTranslatef(-1.0625f, 1.0625f, 0.0f);
+    for(int x=0; x<MAP_SIZE; x++){
+        glTranslatef(0.125f, 0.0f, 0.0f);
+        for(int y=0; y<MAP_SIZE; y++){
+            glTranslatef(0.0f, -0.125f, 0.0f);
+            //yellow-green
+            if(bitMap[y][x]==1){
+                glColor3f(1.0f, 0.8667f, 0.0117f);
+                glutSolidCube(0.125);
+            }
+            //red
+            else if(bitMap[y][x]==2){
+                glColor3f(1.0f, 0.0196f, 0.0196f);
+                glutSolidCube(0.125);
+            }
+            //blue
+            else if(bitMap[y][x]==3){
+                glColor3f(0.1098f, 0.0313f, 0.541f);
+                glutSolidCube(0.125);
+            }
+            //black
+            else if (bitMap[y][x]){
+                glColor3f(0.0f, 0.0f, 0.0f);
+                glutSolidCube(0.125);
+            }
+            //white
+            else{
+                glColor3f(1.0f, 1.0f, 1.0f);
+                glutSolidCube(0.125);
+            }
+            
+            
+        }
+        glTranslatef(0.0f, 2.0f, 0.0);
+    }
+    glFlush();
+}
+
+int main(int argc, char * argv[]) {
+    glutInit(&argc, argv); //
+    glutCreateWindow("Not Mike Wazowski.");
+    glutDisplayFunc(display);
+    glutMainLoop();
+    return 0;
+}
